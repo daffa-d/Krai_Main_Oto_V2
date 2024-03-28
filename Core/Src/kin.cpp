@@ -51,11 +51,11 @@ MotorKin InverseKin(vector3Kin *calOut){
 	error_arrived = sqrt(pow(calOut->x, 2) + pow(calOut->y, 2) + pow(calOut->th, 2));
 	errorPub = error_arrived;
 
-	if(error_arrived < 0.8)
+	if(error_arrived < 0.2)
 	{
 		calOut->x = 0;
 		calOut->y = 0;
-		calOut->th = 0;
+		calOut->th = 0; // klo pake ini jgn lupa tambahin yg theta juga di normnya
 	}
 	else
 	{

@@ -31,23 +31,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .comment      00000043  00000000  00000000  00030228  2**0
                   CONTENTS, READONLY
- 14 .debug_info   000282b5  00000000  00000000  0003026b  2**0
+ 14 .debug_info   000282a3  00000000  00000000  0003026b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_abbrev 00004ec0  00000000  00000000  00058520  2**0
+ 15 .debug_abbrev 00004ebe  00000000  00000000  0005850e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_aranges 00001d88  00000000  00000000  0005d3e0  2**3
+ 16 .debug_aranges 00001d80  00000000  00000000  0005d3d0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_rnglists 00001713  00000000  00000000  0005f168  2**0
+ 17 .debug_rnglists 0000170d  00000000  00000000  0005f150  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_macro  0000a631  00000000  00000000  0006087b  2**0
+ 18 .debug_macro  0000a631  00000000  00000000  0006085d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   00022c5f  00000000  00000000  0006aeac  2**0
+ 19 .debug_line   00022c34  00000000  00000000  0006ae8e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    000f2658  00000000  00000000  0008db0b  2**0
+ 20 .debug_str    000f2639  00000000  00000000  0008dac2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  00009548  00000000  00000000  00180164  2**2
+ 21 .debug_frame  0000952c  00000000  00000000  001800fc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 0000006c  00000000  00000000  001896ac  2**0
+ 22 .debug_line_str 0000006c  00000000  00000000  00189628  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2011,9 +2011,9 @@ void Lcd_send_int(int number) {
  8001504:	00000000 	.word	0x00000000
 
 08001508 <ForwardKin>:
-//		prevTime = HAL_GetTick();
-//	}
-//}
+unsigned long prevTime;
+double last_outDot[3];
+float error_arrived; // Variable only kin.cpp
 
 
 vector3Kin ForwardKin(float xStar, float yStar, float thStar){
@@ -2491,10 +2491,10 @@ vector3Kin ForwardKin(float xStar, float yStar, float thStar){
  80019e6:	46bd      	mov	sp, r7
  80019e8:	e8bd 8fb0 	ldmia.w	sp!, {r4, r5, r7, r8, r9, sl, fp, pc}
  80019ec:	f3af 8000 	nop.w
- 80019f0:	3b79fe9f 	.word	0x3b79fe9f
- 80019f4:	3ecd313e 	.word	0x3ecd313e
- 80019f8:	534c833b 	.word	0x534c833b
- 80019fc:	3eb8ff80 	.word	0x3eb8ff80
+ 80019f0:	88dfb80c 	.word	0x88dfb80c
+ 80019f4:	3ecc2f8b 	.word	0x3ecc2f8b
+ 80019f8:	416f8bff 	.word	0x416f8bff
+ 80019fc:	3eba5719 	.word	0x3eba5719
  8001a00:	2000022c 	.word	0x2000022c
  8001a04:	20000220 	.word	0x20000220
  8001a08:	42c80000 	.word	0x42c80000
@@ -2604,7 +2604,7 @@ MotorKin InverseKin(vector3Kin *calOut){
  8001aee:	4a1d      	ldr	r2, [pc, #116]	; (8001b64 <InverseKin+0x10c>)
  8001af0:	6013      	str	r3, [r2, #0]
 
-	if(error_arrived < 0.8)
+	if(error_arrived < 0.2)
  8001af2:	4b1b      	ldr	r3, [pc, #108]	; (8001b60 <InverseKin+0x108>)
  8001af4:	681b      	ldr	r3, [r3, #0]
  8001af6:	4618      	mov	r0, r3
@@ -2624,7 +2624,7 @@ MotorKin InverseKin(vector3Kin *calOut){
  8001b14:	683b      	ldr	r3, [r7, #0]
  8001b16:	f04f 0200 	mov.w	r2, #0
  8001b1a:	605a      	str	r2, [r3, #4]
-		calOut->th = 0;
+		calOut->th = 0; // klo pake ini jgn lupa tambahin yg theta juga di normnya
  8001b1c:	683b      	ldr	r3, [r7, #0]
  8001b1e:	f04f 0200 	mov.w	r2, #0
  8001b22:	609a      	str	r2, [r3, #8]
@@ -2656,7 +2656,7 @@ MotorKin InverseKin(vector3Kin *calOut){
  8001b52:	bdb0      	pop	{r4, r5, r7, pc}
  8001b54:	f3af 8000 	nop.w
  8001b58:	9999999a 	.word	0x9999999a
- 8001b5c:	3fe99999 	.word	0x3fe99999
+ 8001b5c:	3fc99999 	.word	0x3fc99999
  8001b60:	2000023c 	.word	0x2000023c
  8001b64:	20000600 	.word	0x20000600
 
@@ -3006,8 +3006,8 @@ void kinMotor_V3(MotorKin *mtrKin, float Ex, float Ey, float Eth)
  8001ee4:	f3af 8000 	nop.w
  8001ee8:	a2529d39 	.word	0xa2529d39
  8001eec:	3f91df46 	.word	0x3f91df46
- 8001ef0:	181f86ea 	.word	0x181f86ea
- 8001ef4:	c08cb9e9 	.word	0xc08cb9e9
+ 8001ef0:	0412304c 	.word	0x0412304c
+ 8001ef4:	c09092a4 	.word	0xc09092a4
  8001ef8:	b0184066 	.word	0xb0184066
  8001efc:	408618da 	.word	0x408618da
  8001f00:	66666666 	.word	0x66666666
@@ -3308,16 +3308,16 @@ void kinMotor_V3(MotorKin *mtrKin, float Ex, float Ey, float Eth)
 	if(mtrKin->w1 > Max_Cutoff_Mtr) mtrKin->w1 = Max_Cutoff_Mtr;
  8002206:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  8002208:	681b      	ldr	r3, [r3, #0]
- 800220a:	f5b3 7f61 	cmp.w	r3, #900	; 0x384
+ 800220a:	f5b3 7f16 	cmp.w	r3, #600	; 0x258
  800220e:	dd04      	ble.n	800221a <kinMotor_V3+0x6b2>
  8002210:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 8002212:	f44f 7261 	mov.w	r2, #900	; 0x384
+ 8002212:	f44f 7216 	mov.w	r2, #600	; 0x258
  8002216:	601a      	str	r2, [r3, #0]
  8002218:	e007      	b.n	800222a <kinMotor_V3+0x6c2>
 	else if(mtrKin->w1 < Min_Cutoff_Mtr) mtrKin->w1 = Min_Cutoff_Mtr;
  800221a:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  800221c:	681b      	ldr	r3, [r3, #0]
- 800221e:	f513 7f61 	cmn.w	r3, #900	; 0x384
+ 800221e:	f513 7f16 	cmn.w	r3, #600	; 0x258
  8002222:	da02      	bge.n	800222a <kinMotor_V3+0x6c2>
  8002224:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  8002226:	4a11      	ldr	r2, [pc, #68]	; (800226c <kinMotor_V3+0x704>)
@@ -3326,17 +3326,17 @@ void kinMotor_V3(MotorKin *mtrKin, float Ex, float Ey, float Eth)
 	if(mtrKin->w2 > Max_Cutoff_Mtr) mtrKin->w2 = Max_Cutoff_Mtr;
  800222a:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  800222c:	685b      	ldr	r3, [r3, #4]
- 800222e:	f5b3 7f61 	cmp.w	r3, #900	; 0x384
+ 800222e:	f5b3 7f16 	cmp.w	r3, #600	; 0x258
  8002232:	dd1d      	ble.n	8002270 <kinMotor_V3+0x708>
  8002234:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 8002236:	f44f 7261 	mov.w	r2, #900	; 0x384
+ 8002236:	f44f 7216 	mov.w	r2, #600	; 0x258
  800223a:	605a      	str	r2, [r3, #4]
  800223c:	e020      	b.n	8002280 <kinMotor_V3+0x718>
  800223e:	bf00      	nop
  8002240:	a2529d39 	.word	0xa2529d39
  8002244:	3f91df46 	.word	0x3f91df46
- 8002248:	181f86eb 	.word	0x181f86eb
- 800224c:	408cb9e9 	.word	0x408cb9e9
+ 8002248:	0412304d 	.word	0x0412304d
+ 800224c:	409092a4 	.word	0x409092a4
  8002250:	b0184065 	.word	0xb0184065
  8002254:	c08618da 	.word	0xc08618da
  8002258:	66666666 	.word	0x66666666
@@ -3344,11 +3344,11 @@ void kinMotor_V3(MotorKin *mtrKin, float Ex, float Ey, float Eth)
  8002260:	b0184065 	.word	0xb0184065
  8002264:	408618da 	.word	0x408618da
  8002268:	20000214 	.word	0x20000214
- 800226c:	fffffc7c 	.word	0xfffffc7c
+ 800226c:	fffffda8 	.word	0xfffffda8
 	else if(mtrKin->w2 < Min_Cutoff_Mtr) mtrKin->w2 = Min_Cutoff_Mtr;
  8002270:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  8002272:	685b      	ldr	r3, [r3, #4]
- 8002274:	f513 7f61 	cmn.w	r3, #900	; 0x384
+ 8002274:	f513 7f16 	cmn.w	r3, #600	; 0x258
  8002278:	da02      	bge.n	8002280 <kinMotor_V3+0x718>
  800227a:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  800227c:	4a15      	ldr	r2, [pc, #84]	; (80022d4 <kinMotor_V3+0x76c>)
@@ -3357,16 +3357,16 @@ void kinMotor_V3(MotorKin *mtrKin, float Ex, float Ey, float Eth)
 	if(mtrKin->w3 > Max_Cutoff_Mtr) mtrKin->w3 = Max_Cutoff_Mtr;
  8002280:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  8002282:	689b      	ldr	r3, [r3, #8]
- 8002284:	f5b3 7f61 	cmp.w	r3, #900	; 0x384
+ 8002284:	f5b3 7f16 	cmp.w	r3, #600	; 0x258
  8002288:	dd04      	ble.n	8002294 <kinMotor_V3+0x72c>
  800228a:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 800228c:	f44f 7261 	mov.w	r2, #900	; 0x384
+ 800228c:	f44f 7216 	mov.w	r2, #600	; 0x258
  8002290:	609a      	str	r2, [r3, #8]
  8002292:	e007      	b.n	80022a4 <kinMotor_V3+0x73c>
 	else if(mtrKin->w3 < Min_Cutoff_Mtr) mtrKin->w3 = Min_Cutoff_Mtr;
  8002294:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  8002296:	689b      	ldr	r3, [r3, #8]
- 8002298:	f513 7f61 	cmn.w	r3, #900	; 0x384
+ 8002298:	f513 7f16 	cmn.w	r3, #600	; 0x258
  800229c:	da02      	bge.n	80022a4 <kinMotor_V3+0x73c>
  800229e:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  80022a0:	4a0c      	ldr	r2, [pc, #48]	; (80022d4 <kinMotor_V3+0x76c>)
@@ -3375,10 +3375,10 @@ void kinMotor_V3(MotorKin *mtrKin, float Ex, float Ey, float Eth)
 	if(mtrKin->w4 > Max_Cutoff_Mtr) mtrKin->w4 = Max_Cutoff_Mtr;
  80022a4:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  80022a6:	68db      	ldr	r3, [r3, #12]
- 80022a8:	f5b3 7f61 	cmp.w	r3, #900	; 0x384
+ 80022a8:	f5b3 7f16 	cmp.w	r3, #600	; 0x258
  80022ac:	dd04      	ble.n	80022b8 <kinMotor_V3+0x750>
  80022ae:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 80022b0:	f44f 7261 	mov.w	r2, #900	; 0x384
+ 80022b0:	f44f 7216 	mov.w	r2, #600	; 0x258
  80022b4:	60da      	str	r2, [r3, #12]
 	else if(mtrKin->w4 < Min_Cutoff_Mtr) mtrKin->w4 = Min_Cutoff_Mtr;
 }
@@ -3386,7 +3386,7 @@ void kinMotor_V3(MotorKin *mtrKin, float Ex, float Ey, float Eth)
 	else if(mtrKin->w4 < Min_Cutoff_Mtr) mtrKin->w4 = Min_Cutoff_Mtr;
  80022b8:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  80022ba:	68db      	ldr	r3, [r3, #12]
- 80022bc:	f513 7f61 	cmn.w	r3, #900	; 0x384
+ 80022bc:	f513 7f16 	cmn.w	r3, #600	; 0x258
  80022c0:	da02      	bge.n	80022c8 <kinMotor_V3+0x760>
  80022c2:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  80022c4:	4a03      	ldr	r2, [pc, #12]	; (80022d4 <kinMotor_V3+0x76c>)
@@ -3397,7 +3397,7 @@ void kinMotor_V3(MotorKin *mtrKin, float Ex, float Ey, float Eth)
  80022cc:	46bd      	mov	sp, r7
  80022ce:	e8bd 8fb0 	ldmia.w	sp!, {r4, r5, r7, r8, r9, sl, fp, pc}
  80022d2:	bf00      	nop
- 80022d4:	fffffc7c 	.word	0xfffffc7c
+ 80022d4:	fffffda8 	.word	0xfffffda8
 
 080022d8 <kinMotor>:
 
@@ -6604,12 +6604,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
  80038fc:	681b      	ldr	r3, [r3, #0]
  80038fe:	4a15      	ldr	r2, [pc, #84]	; (8003954 <HAL_TIM_PeriodElapsedCallback+0x70>)
  8003900:	4293      	cmp	r3, r2
- 8003902:	d121      	bne.n	8003948 <HAL_TIM_PeriodElapsedCallback+0x64>
+ 8003902:	d120      	bne.n	8003946 <HAL_TIM_PeriodElapsedCallback+0x62>
 	  for (uint8_t i = 0; i < 3; i++) {
  8003904:	2300      	movs	r3, #0
  8003906:	73fb      	strb	r3, [r7, #15]
- 8003908:	e01b      	b.n	8003942 <HAL_TIM_PeriodElapsedCallback+0x5e>
-	  	rpmExt[i] = valueENC_EXT[i] * 6000 / 720;
+ 8003908:	e01a      	b.n	8003940 <HAL_TIM_PeriodElapsedCallback+0x5c>
+	  	rpmExt[i] = valueENC_EXT[i] * 6000 / 715;
  800390a:	7bfb      	ldrb	r3, [r7, #15]
  800390c:	4a12      	ldr	r2, [pc, #72]	; (8003958 <HAL_TIM_PeriodElapsedCallback+0x74>)
  800390e:	f852 3023 	ldr.w	r3, [r2, r3, lsl #2]
@@ -6617,39 +6617,39 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
  8003916:	fb02 f303 	mul.w	r3, r2, r3
  800391a:	4a10      	ldr	r2, [pc, #64]	; (800395c <HAL_TIM_PeriodElapsedCallback+0x78>)
  800391c:	fb82 1203 	smull	r1, r2, r2, r3
- 8003920:	441a      	add	r2, r3
- 8003922:	1252      	asrs	r2, r2, #9
- 8003924:	17db      	asrs	r3, r3, #31
- 8003926:	1ad2      	subs	r2, r2, r3
- 8003928:	7bfb      	ldrb	r3, [r7, #15]
- 800392a:	b211      	sxth	r1, r2
- 800392c:	4a0c      	ldr	r2, [pc, #48]	; (8003960 <HAL_TIM_PeriodElapsedCallback+0x7c>)
- 800392e:	f822 1013 	strh.w	r1, [r2, r3, lsl #1]
+ 8003920:	1212      	asrs	r2, r2, #8
+ 8003922:	17db      	asrs	r3, r3, #31
+ 8003924:	1ad2      	subs	r2, r2, r3
+ 8003926:	7bfb      	ldrb	r3, [r7, #15]
+ 8003928:	b211      	sxth	r1, r2
+ 800392a:	4a0d      	ldr	r2, [pc, #52]	; (8003960 <HAL_TIM_PeriodElapsedCallback+0x7c>)
+ 800392c:	f822 1013 	strh.w	r1, [r2, r3, lsl #1]
 	  	valueENC_EXT[i] = 0;
- 8003932:	7bfb      	ldrb	r3, [r7, #15]
- 8003934:	4a08      	ldr	r2, [pc, #32]	; (8003958 <HAL_TIM_PeriodElapsedCallback+0x74>)
- 8003936:	2100      	movs	r1, #0
- 8003938:	f842 1023 	str.w	r1, [r2, r3, lsl #2]
+ 8003930:	7bfb      	ldrb	r3, [r7, #15]
+ 8003932:	4a09      	ldr	r2, [pc, #36]	; (8003958 <HAL_TIM_PeriodElapsedCallback+0x74>)
+ 8003934:	2100      	movs	r1, #0
+ 8003936:	f842 1023 	str.w	r1, [r2, r3, lsl #2]
 	  for (uint8_t i = 0; i < 3; i++) {
- 800393c:	7bfb      	ldrb	r3, [r7, #15]
- 800393e:	3301      	adds	r3, #1
- 8003940:	73fb      	strb	r3, [r7, #15]
- 8003942:	7bfb      	ldrb	r3, [r7, #15]
- 8003944:	2b02      	cmp	r3, #2
- 8003946:	d9e0      	bls.n	800390a <HAL_TIM_PeriodElapsedCallback+0x26>
+ 800393a:	7bfb      	ldrb	r3, [r7, #15]
+ 800393c:	3301      	adds	r3, #1
+ 800393e:	73fb      	strb	r3, [r7, #15]
+ 8003940:	7bfb      	ldrb	r3, [r7, #15]
+ 8003942:	2b02      	cmp	r3, #2
+ 8003944:	d9e1      	bls.n	800390a <HAL_TIM_PeriodElapsedCallback+0x26>
 	 }
   }
 
   /* USER CODE END Callback 1 */
 }
- 8003948:	bf00      	nop
- 800394a:	3710      	adds	r7, #16
- 800394c:	46bd      	mov	sp, r7
- 800394e:	bd80      	pop	{r7, pc}
+ 8003946:	bf00      	nop
+ 8003948:	3710      	adds	r7, #16
+ 800394a:	46bd      	mov	sp, r7
+ 800394c:	bd80      	pop	{r7, pc}
+ 800394e:	bf00      	nop
  8003950:	40002000 	.word	0x40002000
  8003954:	40001c00 	.word	0x40001c00
  8003958:	200005a4 	.word	0x200005a4
- 800395c:	b60b60b7 	.word	0xb60b60b7
+ 800395c:	5ba8a345 	.word	0x5ba8a345
  8003960:	20000218 	.word	0x20000218
 
 08003964 <Error_Handler>:
@@ -12012,9 +12012,9 @@ class NodeHandle_ : public NodeHandleBase_
  8006494:	080149d0 	.word	0x080149d0
 
 08006498 <HAL_UART_TxCpltCallback>:
+ros::Subscriber<geometry_msgs::Vector3> invKinematic("robot/inv_target_kinematic", &invkinCallback);
 ros::Subscriber<std_msgs::Bool> stateInv_Sub("robot/stateInv", &stateInverseKin);
 ros::Publisher errorArr("robot/Error_Aksen", &error_arr_msg);
-//ros::Publisher AksenPub("robot/aksen", &aksenMsg);
 
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
@@ -12068,7 +12068,6 @@ void setup(void) {
 	nh.initNode();
  80064e4:	480b      	ldr	r0, [pc, #44]	; (8006514 <setup+0x34>)
  80064e6:	f000 f8e9 	bl	80066bc <_ZN3ros11NodeHandle_I13STM32HardwareLi25ELi25ELi1024ELi1024EE8initNodeEv>
-//	nh.advertise(AksenPub);
 	nh.advertise(errorArr);
  80064ea:	490b      	ldr	r1, [pc, #44]	; (8006518 <setup+0x38>)
  80064ec:	4809      	ldr	r0, [pc, #36]	; (8006514 <setup+0x34>)
@@ -12105,7 +12104,6 @@ void loop(){
  800652a:	af00      	add	r7, sp, #0
 	errorArrPublish();
  800652c:	f000 f80a 	bl	8006544 <_Z15errorArrPublishv>
-//	AksenPublish();
 	nh.spinOnce();
  8006530:	4803      	ldr	r0, [pc, #12]	; (8006540 <loop+0x18>)
  8006532:	f000 f947 	bl	80067c4 <_ZN3ros11NodeHandle_I13STM32HardwareLi25ELi25ELi1024ELi1024EE8spinOnceEv>
@@ -12118,10 +12116,6 @@ void loop(){
  8006540:	20000614 	.word	0x20000614
 
 08006544 <_Z15errorArrPublishv>:
-	aksenMsg.y = Aksendbg[1];
-	aksenMsg.z = Aksendbg[2];
-//	AksenPub.publish(&aksenMsg);
-}
 
 void errorArrPublish(){
  8006544:	b580      	push	{r7, lr}

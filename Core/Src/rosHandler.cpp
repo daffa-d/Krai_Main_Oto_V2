@@ -48,7 +48,6 @@ ros::Subscriber<geometry_msgs::Vector3> kinematic("robot/target_kinematic", &kin
 ros::Subscriber<geometry_msgs::Vector3> invKinematic("robot/inv_target_kinematic", &invkinCallback);
 ros::Subscriber<std_msgs::Bool> stateInv_Sub("robot/stateInv", &stateInverseKin);
 ros::Publisher errorArr("robot/Error_Aksen", &error_arr_msg);
-//ros::Publisher AksenPub("robot/aksen", &aksenMsg);
 
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
@@ -64,7 +63,6 @@ void errorArrPublish();
 
 void setup(void) {
 	nh.initNode();
-//	nh.advertise(AksenPub);
 	nh.advertise(errorArr);
 	nh.subscribe(invKinematic);
 	nh.subscribe(kinematic);
@@ -75,16 +73,8 @@ void setup(void) {
 
 void loop(){
 	errorArrPublish();
-//	AksenPublish();
 	nh.spinOnce();
 	HAL_Delay(10);
-}
-
-void AksenPublish(){
-	aksenMsg.x = Aksendbg[0];
-	aksenMsg.y = Aksendbg[1];
-	aksenMsg.z = Aksendbg[2];
-//	AksenPub.publish(&aksenMsg);
 }
 
 void errorArrPublish(){
