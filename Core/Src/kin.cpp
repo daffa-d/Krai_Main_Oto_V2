@@ -16,40 +16,6 @@ float Aksen[3];
 unsigned long prevTime;
 double last_outDot[3];
 float error_arrived; // Variable only kin.cpp
-//float scale1;
-//float scale2;
-
-//void ForwardKin(){
-//	outDot[0] = cos(d2r(ENC_1)) * rpmExt[0] + cos(d2r(ENC_2)) * rpmExt[1] + cos(d2r(ENC_3)) * rpmExt[2]; // X
-//	outDot[1] = sin(d2r(ENC_1)) * rpmExt[0] + sin(d2r(ENC_2)) * rpmExt[1] + sin(d2r(ENC_3)) * rpmExt[2]; // Y
-//	outDot[2] = lengthAlpha * rpmExt[0] + lengthAlpha * rpmExt[1] + lengthAlpha * rpmExt[2]; // TH
-//
-//	if(outDot[0] >= 0) scale1 = 0.00000438;
-//	else scale1 = 0.00000438;
-//	if(outDot[1] >= 0) scale2 = 0.00000214;
-//	else scale2 = 0.0000021;
-//
-//	last_outDot[0] = outDot[0];
-//	last_outDot[1] = outDot[1];
-//
-//	outDot[0] = cos(d2r(yawVal)) * (scale1 * outDot[0]) + -sin(d2r(yawVal)) * (scale2 * outDot[1]);
-//	outDot[0] = sin(d2r(yawVal)) * (scale1 * outDot[0]) + cos(d2r(yawVal)) * (scale2 * outDot[1]);
-//
-////	outDot[0] = cos(d2r(yawVal)) * (scale1 * (cos(d2r(ENC_1)) * rpmExt[0] + cos(d2r(ENC_2)) * rpmExt[1] + cos(d2r(ENC_3)) * rpmExt[2])) +
-////					-sin(d2r(yawVal)) * (scale2 * (sin(d2r(ENC_1)) * rpmExt[0] + sin(d2r(ENC_2)) * rpmExt[1] + sin(d2r(ENC_3)) * rpmExt[2])); // X
-////	outDot[1] = sin(d2r(yawVal)) * (scale1 * (cos(d2r(ENC_1)) * rpmExt[0] + cos(d2r(ENC_2)) * rpmExt[1] + cos(d2r(ENC_3)) * rpmExt[2])) +
-////					cos(d2r(yawVal)) * (scale2 * (sin(d2r(ENC_1)) * rpmExt[0] + sin(d2r(ENC_2)) * rpmExt[1] + sin(d2r(ENC_3)) * rpmExt[2])); // Y
-////	outDot[2] = lengthAlpha * rpmExt[0] + lengthAlpha * rpmExt[1] + lengthAlpha * rpmExt[2]; // TH
-//
-//
-//	if(HAL_GetTick() - prevTime >= 100){
-//		Aksen[0] = Aksen[0] + outDot[0] * 100; // X
-//		Aksen[1] = Aksen[1] + outDot[1] * 100; // Y
-//	//	Aksen[2] = (Aksen[2] + outDot[2] * 100) * scale3; // theta
-//		Aksen[2] = yawVal; // theta diambil dari heading imu
-//		prevTime = HAL_GetTick();
-//	}
-//}
 
 
 vector3Kin ForwardKin(float xStar, float yStar, float thStar){
@@ -207,4 +173,36 @@ void kinMotor(MotorKin *mtrKin, float x, float y, float th) {
 //	valueCal[2] = thStar - Aksen[2];
 //
 //	return valueCal;
+//}
+
+//void ForwardKin(){
+//	outDot[0] = cos(d2r(ENC_1)) * rpmExt[0] + cos(d2r(ENC_2)) * rpmExt[1] + cos(d2r(ENC_3)) * rpmExt[2]; // X
+//	outDot[1] = sin(d2r(ENC_1)) * rpmExt[0] + sin(d2r(ENC_2)) * rpmExt[1] + sin(d2r(ENC_3)) * rpmExt[2]; // Y
+//	outDot[2] = lengthAlpha * rpmExt[0] + lengthAlpha * rpmExt[1] + lengthAlpha * rpmExt[2]; // TH
+//
+//	if(outDot[0] >= 0) scale1 = 0.00000438;
+//	else scale1 = 0.00000438;
+//	if(outDot[1] >= 0) scale2 = 0.00000214;
+//	else scale2 = 0.0000021;
+//
+//	last_outDot[0] = outDot[0];
+//	last_outDot[1] = outDot[1];
+//
+//	outDot[0] = cos(d2r(yawVal)) * (scale1 * outDot[0]) + -sin(d2r(yawVal)) * (scale2 * outDot[1]);
+//	outDot[0] = sin(d2r(yawVal)) * (scale1 * outDot[0]) + cos(d2r(yawVal)) * (scale2 * outDot[1]);
+//
+////	outDot[0] = cos(d2r(yawVal)) * (scale1 * (cos(d2r(ENC_1)) * rpmExt[0] + cos(d2r(ENC_2)) * rpmExt[1] + cos(d2r(ENC_3)) * rpmExt[2])) +
+////					-sin(d2r(yawVal)) * (scale2 * (sin(d2r(ENC_1)) * rpmExt[0] + sin(d2r(ENC_2)) * rpmExt[1] + sin(d2r(ENC_3)) * rpmExt[2])); // X
+////	outDot[1] = sin(d2r(yawVal)) * (scale1 * (cos(d2r(ENC_1)) * rpmExt[0] + cos(d2r(ENC_2)) * rpmExt[1] + cos(d2r(ENC_3)) * rpmExt[2])) +
+////					cos(d2r(yawVal)) * (scale2 * (sin(d2r(ENC_1)) * rpmExt[0] + sin(d2r(ENC_2)) * rpmExt[1] + sin(d2r(ENC_3)) * rpmExt[2])); // Y
+////	outDot[2] = lengthAlpha * rpmExt[0] + lengthAlpha * rpmExt[1] + lengthAlpha * rpmExt[2]; // TH
+//
+//
+//	if(HAL_GetTick() - prevTime >= 100){
+//		Aksen[0] = Aksen[0] + outDot[0] * 100; // X
+//		Aksen[1] = Aksen[1] + outDot[1] * 100; // Y
+//	//	Aksen[2] = (Aksen[2] + outDot[2] * 100) * scale3; // theta
+//		Aksen[2] = yawVal; // theta diambil dari heading imu
+//		prevTime = HAL_GetTick();
+//	}
 //}
