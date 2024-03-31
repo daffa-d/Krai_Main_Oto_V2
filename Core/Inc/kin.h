@@ -22,12 +22,12 @@ extern "C" {
 #define lambdaInv_Y 1000
 #define lambdaInv_TH 500
 
-#define lambdaX 1500
-#define lambdaY 1000
+#define lambdaX 900
+#define lambdaY 900
 #define lambdaTH 60
 #define d2r(x) x*(M_PI/180) // degree to radians
-#define lengthAlpha 0.225 // Panjang Encoder
-#define alphaLengthMotor 0.245 // Panjang Motor
+#define lengthAlpha 0.18 // Panjang Encoder
+#define alphaLengthMotor 0.26 // Panjang Motor
 
 #define ENC_1 135 // Derajat Encoder
 #define ENC_2 45

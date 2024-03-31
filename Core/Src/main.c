@@ -34,6 +34,7 @@
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
+typedef StaticTask_t osStaticThreadDef_t;
 /* USER CODE BEGIN PTD */
 
 /* USER CODE END PTD */
@@ -67,28 +68,33 @@ osThreadId_t myTask01Handle;
 const osThreadAttr_t myTask01_attributes = {
   .name = "myTask01",
   .stack_size = 2048 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
+  .priority = (osPriority_t) osPriorityRealtime,
 };
 /* Definitions for myTask02 */
 osThreadId_t myTask02Handle;
 const osThreadAttr_t myTask02_attributes = {
   .name = "myTask02",
   .stack_size = 512 * 4,
-  .priority = (osPriority_t) osPriorityHigh,
+  .priority = (osPriority_t) osPriorityHigh2,
 };
 /* Definitions for ImuTask */
 osThreadId_t ImuTaskHandle;
 const osThreadAttr_t ImuTask_attributes = {
   .name = "ImuTask",
   .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityHigh1,
+  .priority = (osPriority_t) osPriorityHigh2,
 };
 /* Definitions for myTask04 */
 osThreadId_t myTask04Handle;
+uint32_t myTask04Buffer[ 256 ];
+osStaticThreadDef_t myTask04ControlBlock;
 const osThreadAttr_t myTask04_attributes = {
   .name = "myTask04",
-  .stack_size = 256 * 4,
-  .priority = (osPriority_t) osPriorityLow,
+  .cb_mem = &myTask04ControlBlock,
+  .cb_size = sizeof(myTask04ControlBlock),
+  .stack_mem = &myTask04Buffer[0],
+  .stack_size = sizeof(myTask04Buffer),
+  .priority = (osPriority_t) osPriorityNormal,
 };
 /* USER CODE BEGIN PV */
 int32_t rawYaw; // data mentah heading
@@ -98,7 +104,9 @@ long valueENC_EXT[3];
 float sumError_Threshold;
 vector3Kin vect3_Kin;
 MotorKin MotorOut;
-bno055_vector_t v;
+bno055_vector_t vector;
+bno055_vector_t quat;
+bno055_vector_t line;
 
 
 // Diakses Diluar Main.c
@@ -112,6 +120,7 @@ extern float thtarget;
 //extern float Aksendbg[3];
 extern float InvTarget[3];
 extern bool stateInv;
+extern float msg_imu[10];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -912,10 +921,27 @@ void ImuTask_Function(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	v = bno055_getVectorEuler();
+	quat = bno055_getVectorQuaternion();
+	vector = bno055_getVectorEuler();
+	line = bno055_getVectorLinearAccel();
 	vTaskDelay(10);
-	rawYaw = v.x;
+	rawYaw = vector.x;
 	yawVal = imuCallback(rawYaw);
+
+	msg_imu[0] = quat.w;
+	msg_imu[1] = quat.x;
+	msg_imu[2] = quat.y;
+	msg_imu[3] = quat.z;
+
+	msg_imu[4] = line.x;
+	msg_imu[5] = line.y;
+	msg_imu[6] = line.z;
+
+	msg_imu[7] = vector.x;
+	msg_imu[8] = vector.y;
+	msg_imu[9] = vector.z;
+
+
     osDelay(1);
   }
   /* USER CODE END ImuTask_Function */

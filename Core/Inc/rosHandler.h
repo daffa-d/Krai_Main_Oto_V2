@@ -17,6 +17,7 @@ extern float ytarget;
 extern float thtarget;
 extern float errorPub;
 extern float InvTarget[3];
+extern float msg_imu[10];
 extern bool stateInv;
 
 #ifdef __cplusplus

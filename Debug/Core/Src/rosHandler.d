@@ -39,7 +39,10 @@ Core/Src/rosHandler.o: ../Core/Src/rosHandler.cpp \
  ../Core/Inc/ros/service_server.h ../Core/Inc/ros/service_client.h \
  ../Core/Inc/STM32Hardware.h ../Core/Inc/geometry_msgs/Quaternion.h \
  ../Core/Inc/geometry_msgs/Vector3.h ../Core/Inc/std_msgs/Float32.h \
- ../Core/Inc/std_msgs/Bool.h ../Core/Inc/kin.h
+ ../Core/Inc/std_msgs/Float32MultiArray.h \
+ ../Core/Inc/std_msgs/MultiArrayLayout.h \
+ ../Core/Inc/std_msgs/MultiArrayDimension.h ../Core/Inc/std_msgs/Bool.h \
+ ../Core/Inc/kin.h
 ../Core/Inc/rosHandler.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -91,5 +94,8 @@ Core/Src/rosHandler.o: ../Core/Src/rosHandler.cpp \
 ../Core/Inc/geometry_msgs/Quaternion.h:
 ../Core/Inc/geometry_msgs/Vector3.h:
 ../Core/Inc/std_msgs/Float32.h:
+../Core/Inc/std_msgs/Float32MultiArray.h:
+../Core/Inc/std_msgs/MultiArrayLayout.h:
+../Core/Inc/std_msgs/MultiArrayDimension.h:
 ../Core/Inc/std_msgs/Bool.h:
 ../Core/Inc/kin.h:

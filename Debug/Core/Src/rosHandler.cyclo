@@ -46,39 +46,55 @@
 ../Core/Inc/std_msgs/Float32.h:39:17:virtual int std_msgs::Float32::deserialize(unsigned char*)	1
 ../Core/Inc/std_msgs/Float32.h:56:26:virtual const char* std_msgs::Float32::getType()	1
 ../Core/Inc/std_msgs/Float32.h:57:26:virtual const char* std_msgs::Float32::getMD5()	1
+../Core/Inc/std_msgs/MultiArrayDimension.h:22:5:std_msgs::MultiArrayDimension::MultiArrayDimension()	1
+../Core/Inc/std_msgs/MultiArrayDimension.h:29:17:virtual int std_msgs::MultiArrayDimension::serialize(unsigned char*) const	1
+../Core/Inc/std_msgs/MultiArrayDimension.h:50:17:virtual int std_msgs::MultiArrayDimension::deserialize(unsigned char*)	2
+../Core/Inc/std_msgs/MultiArrayDimension.h:75:26:virtual const char* std_msgs::MultiArrayDimension::getType()	1
+../Core/Inc/std_msgs/MultiArrayDimension.h:76:26:virtual const char* std_msgs::MultiArrayDimension::getMD5()	1
+../Core/Inc/std_msgs/MultiArrayLayout.h:23:5:std_msgs::MultiArrayLayout::MultiArrayLayout()	1
+../Core/Inc/std_msgs/MultiArrayLayout.h:29:17:virtual int std_msgs::MultiArrayLayout::serialize(unsigned char*) const	2
+../Core/Inc/std_msgs/MultiArrayLayout.h:48:17:virtual int std_msgs::MultiArrayLayout::deserialize(unsigned char*)	3
+../Core/Inc/std_msgs/MultiArrayLayout.h:71:26:virtual const char* std_msgs::MultiArrayLayout::getType()	1
+../Core/Inc/std_msgs/MultiArrayLayout.h:72:26:virtual const char* std_msgs::MultiArrayLayout::getMD5()	1
+../Core/Inc/std_msgs/Float32MultiArray.h:23:5:std_msgs::Float32MultiArray::Float32MultiArray()	1
+../Core/Inc/std_msgs/Float32MultiArray.h:29:17:virtual int std_msgs::Float32MultiArray::serialize(unsigned char*) const	2
+../Core/Inc/std_msgs/Float32MultiArray.h:53:17:virtual int std_msgs::Float32MultiArray::deserialize(unsigned char*)	3
+../Core/Inc/std_msgs/Float32MultiArray.h:82:26:virtual const char* std_msgs::Float32MultiArray::getType()	1
+../Core/Inc/std_msgs/Float32MultiArray.h:83:26:virtual const char* std_msgs::Float32MultiArray::getMD5()	1
 ../Core/Inc/std_msgs/Bool.h:18:5:std_msgs::Bool::Bool()	1
 ../Core/Inc/std_msgs/Bool.h:23:17:virtual int std_msgs::Bool::serialize(unsigned char*) const	1
 ../Core/Inc/std_msgs/Bool.h:36:17:virtual int std_msgs::Bool::deserialize(unsigned char*)	1
 ../Core/Inc/std_msgs/Bool.h:50:26:virtual const char* std_msgs::Bool::getType()	1
 ../Core/Inc/std_msgs/Bool.h:51:26:virtual const char* std_msgs::Bool::getMD5()	1
-../Core/Src/rosHandler.cpp:24:6:void kinCallback(const geometry_msgs::Vector3&)	1
-../Core/Src/rosHandler.cpp:30:6:void invkinCallback(const geometry_msgs::Vector3&)	1
-../Core/Src/rosHandler.cpp:36:6:void stateInverseKin(const std_msgs::Bool&)	1
+../Core/Src/rosHandler.cpp:26:6:void kinCallback(const geometry_msgs::Vector3&)	1
+../Core/Src/rosHandler.cpp:32:6:void invkinCallback(const geometry_msgs::Vector3&)	1
+../Core/Src/rosHandler.cpp:38:6:void stateInverseKin(const std_msgs::Bool&)	1
 ../Core/Inc/ros/node_handle.h:50:7:constexpr ros::NodeHandleBase_::NodeHandleBase_()	1
 ../Core/Inc/ros/node_handle.h:106:7:constexpr ros::NodeHandle_<STM32Hardware>::NodeHandle_()	1
-../Core/Src/rosHandler.cpp:53:6:void HAL_UART_TxCpltCallback(UART_HandleTypeDef*)	1
-../Core/Src/rosHandler.cpp:57:6:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	1
-../Core/Src/rosHandler.cpp:64:6:void setup()	1
-../Core/Src/rosHandler.cpp:74:6:void loop()	1
-../Core/Src/rosHandler.cpp:80:6:void errorArrPublish()	1
+../Core/Src/rosHandler.cpp:56:6:void HAL_UART_TxCpltCallback(UART_HandleTypeDef*)	1
+../Core/Src/rosHandler.cpp:60:6:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	1
+../Core/Src/rosHandler.cpp:67:6:void setup()	1
+../Core/Src/rosHandler.cpp:78:6:void loop()	1
+../Core/Src/rosHandler.cpp:85:6:void errorArrPublish()	1
+../Core/Src/rosHandler.cpp:90:6:void imuPublish()	1
 ../Core/Inc/ros/msg.h:188:15:static void ros::Msg::varToArr(A, V) [with A = unsigned char*; V = long unsigned int]	2
 ../Core/Inc/ros/msg.h:196:15:static void ros::Msg::arrToVar(V&, A) [with V = long unsigned int; A = unsigned char*]	2
 ../Core/Inc/ros/subscriber.h:44:7:ros::Subscriber_::Subscriber_()	1
 ../Core/Inc/ros/subscriber.h:107:3:ros::Subscriber<MsgT, void>::Subscriber(const char*, ros::Subscriber<MsgT, void>::CallbackT, int) [with MsgT = geometry_msgs::Vector3]	1
 ../Core/Inc/ros/subscriber.h:107:3:ros::Subscriber<MsgT, void>::Subscriber(const char*, ros::Subscriber<MsgT, void>::CallbackT, int) [with MsgT = std_msgs::Bool]	1
-../Core/Inc/ros/node_handle.h:130:13:Hardware* ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::getHardware() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	1
-../Core/Inc/ros/node_handle.h:136:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::initNode() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	1
-../Core/Inc/ros/node_handle.h:397:8:bool ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::advertise(ros::Publisher&) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	3
-../Core/Inc/ros/node_handle.h:413:8:bool ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::subscribe(ros::Subscriber_&) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	3
-../Core/Inc/ros/node_handle.h:189:15:int ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::spinOnce() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	33
-../Core/Inc/ros/node_handle.h:354:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::requestSyncTime() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	1
-../Core/Inc/ros/node_handle.h:445:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::negotiateTopics() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	5
-../Core/Inc/ros/node_handle.h:361:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::syncTime(uint8_t*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	1
-../Core/Inc/ros/node_handle.h:476:15:int ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::publish(int, const ros::Msg*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	5
-../Core/Inc/ros/node_handle.h:384:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::setNow(const ros::Time&) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	1
-../Core/Inc/ros/node_handle.h:538:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::logerror(const char*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	1
-../Core/Inc/ros/node_handle.h:517:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::log(char, const char*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	1
-../Core/Src/rosHandler.cpp:83:1:void __static_initialization_and_destruction_0(int, int)	3
+../Core/Inc/ros/node_handle.h:130:13:Hardware* ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::getHardware() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
+../Core/Inc/ros/node_handle.h:136:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::initNode() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
+../Core/Inc/ros/node_handle.h:397:8:bool ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::advertise(ros::Publisher&) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	3
+../Core/Inc/ros/node_handle.h:413:8:bool ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::subscribe(ros::Subscriber_&) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	3
+../Core/Inc/ros/node_handle.h:189:15:int ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::spinOnce() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	33
+../Core/Inc/ros/node_handle.h:354:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::requestSyncTime() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
+../Core/Inc/ros/node_handle.h:445:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::negotiateTopics() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	5
+../Core/Inc/ros/node_handle.h:361:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::syncTime(uint8_t*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
+../Core/Inc/ros/node_handle.h:476:15:int ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::publish(int, const ros::Msg*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	5
+../Core/Inc/ros/node_handle.h:384:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::setNow(const ros::Time&) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
+../Core/Inc/ros/node_handle.h:538:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::logerror(const char*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
+../Core/Inc/ros/node_handle.h:517:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::log(char, const char*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
+../Core/Src/rosHandler.cpp:94:1:void __static_initialization_and_destruction_0(int, int)	3
 ../Core/Inc/ros/subscriber.h:114:16:void ros::Subscriber<MsgT, void>::callback(unsigned char*) [with MsgT = std_msgs::Bool]	1
 ../Core/Inc/ros/subscriber.h:128:15:int ros::Subscriber<MsgT, void>::getEndpointType() [with MsgT = std_msgs::Bool]	1
 ../Core/Inc/ros/subscriber.h:120:24:const char* ros::Subscriber<MsgT, void>::getMsgType() [with MsgT = std_msgs::Bool]	1
@@ -87,5 +103,5 @@
 ../Core/Inc/ros/subscriber.h:128:15:int ros::Subscriber<MsgT, void>::getEndpointType() [with MsgT = geometry_msgs::Vector3]	1
 ../Core/Inc/ros/subscriber.h:120:24:const char* ros::Subscriber<MsgT, void>::getMsgType() [with MsgT = geometry_msgs::Vector3]	1
 ../Core/Inc/ros/subscriber.h:124:24:const char* ros::Subscriber<MsgT, void>::getMsgMD5() [with MsgT = geometry_msgs::Vector3]	1
-../Core/Inc/ros/node_handle.h:345:16:bool ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::connected() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 1024; int OUTPUT_SIZE = 1024]	1
-../Core/Src/rosHandler.cpp:83:1:cpp)	1
+../Core/Inc/ros/node_handle.h:345:16:bool ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::connected() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
+../Core/Src/rosHandler.cpp:94:1:cpp)	1
