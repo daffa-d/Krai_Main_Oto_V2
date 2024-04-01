@@ -29,7 +29,8 @@ Core/Src/kin.o: ../Core/Src/kin.cpp ../Core/Inc/kin.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Core/Inc/main.h ../Core/Inc/rosHandler.h ../Core/Inc/kin.h
+ ../Core/Inc/main.h ../Core/Inc/rosHandler.h ../Core/Inc/kin.h \
+ ../Core/Inc/bno055.h
 ../Core/Inc/kin.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -64,3 +65,4 @@ Core/Src/kin.o: ../Core/Src/kin.cpp ../Core/Inc/kin.h \
 ../Core/Inc/main.h:
 ../Core/Inc/rosHandler.h:
 ../Core/Inc/kin.h:
+../Core/Inc/bno055.h:

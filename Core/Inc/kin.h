@@ -25,6 +25,7 @@ extern "C" {
 #define lambdaX 900
 #define lambdaY 900
 #define lambdaTH 60
+
 #define d2r(x) x*(M_PI/180) // degree to radians
 #define lengthAlpha 0.18 // Panjang Encoder
 #define alphaLengthMotor 0.26 // Panjang Motor
@@ -33,13 +34,6 @@ extern "C" {
 #define ENC_2 45
 #define ENC_3 -90
 
-//#define scale1 0.00000334 // R1
-//#define scale2 0.00000185 // R1
-//#define scale1 0.00000542 // R2
-//#define scale2 0.00000169 // R2
-//#define scale1 0.00000348 // R3
-//#define scale2 0.00000149// R3
-//#define scale3 1 // R3
 #define scale1 0.00000336 //0.00000336
 #define scale2 0.00000157 //0.00000157
 #define scale3 1
@@ -69,11 +63,12 @@ extern "C" {
 #define ENC3B_LOW (HAL_GPIO_ReadPin(ENC_EXT3_B_GPIO_Port, ENC_EXT3_B_Pin) == 0)
 
 extern int16_t rpmExt[3];
-extern int yawVal;
+extern int16_t yawVal;
 extern float outDot[3];
-extern float Aksendbg[3];
+extern float Aksen[3];
 extern float error_arrived;
 extern float InvTarget[3];
+extern float velo[3];
 
 typedef struct {
 	float x;

@@ -8,11 +8,13 @@
 #include <kin.h>
 #include <rosHandler.h>
 
-int yawVal;
-int out[4];
+int16_t yawVal;
 int16_t rpmExt[3];
+int out[4];
 float outDot[3];
 float Aksen[3];
+float prevAksen[3];
+float velo[3];
 unsigned long prevTime;
 double last_outDot[3];
 float error_arrived; // Variable only kin.cpp
@@ -34,6 +36,15 @@ vector3Kin ForwardKin(float xStar, float yStar, float thStar){
 		Aksen[1] = Aksen[1] + outDot[1] * 100 * scale2; // Y
 	//	Aksen[2] = (Aksen[2] + outDot[2] * 100) * scale3; // theta
 		Aksen[2] = yawVal; // theta diambil dari heading imu
+
+		velo[0] = Aksen[0] - prevAksen[0];
+		velo[1] = Aksen[1] - prevAksen[1];
+		velo[2] = Aksen[2] - prevAksen[2];
+
+		prevAksen[0] = Aksen[0];
+		prevAksen[1] = Aksen[1];
+		prevAksen[2] = Aksen[2];
+
 		prevTime = HAL_GetTick();
 	}
 
@@ -48,8 +59,7 @@ MotorKin InverseKin(vector3Kin *calOut){
 			.w1=0, .w2=0, .w3=0, .w4=0
 	};
 
-	error_arrived = sqrt(pow(calOut->x, 2) + pow(calOut->y, 2) + pow(calOut->th, 2));
-	errorPub = error_arrived;
+	errorPub = error_arrived = sqrt(pow(calOut->x, 2) + pow(calOut->y, 2) + pow(calOut->th, 2));
 
 	if(error_arrived < 0.2)
 	{

@@ -66,17 +66,18 @@
 ../Core/Inc/std_msgs/Bool.h:36:17:virtual int std_msgs::Bool::deserialize(unsigned char*)	1
 ../Core/Inc/std_msgs/Bool.h:50:26:virtual const char* std_msgs::Bool::getType()	1
 ../Core/Inc/std_msgs/Bool.h:51:26:virtual const char* std_msgs::Bool::getMD5()	1
-../Core/Src/rosHandler.cpp:26:6:void kinCallback(const geometry_msgs::Vector3&)	1
-../Core/Src/rosHandler.cpp:32:6:void invkinCallback(const geometry_msgs::Vector3&)	1
-../Core/Src/rosHandler.cpp:38:6:void stateInverseKin(const std_msgs::Bool&)	1
+../Core/Src/rosHandler.cpp:29:6:void kinCallback(const geometry_msgs::Vector3&)	1
+../Core/Src/rosHandler.cpp:35:6:void invkinCallback(const geometry_msgs::Vector3&)	1
+../Core/Src/rosHandler.cpp:41:6:void stateInverseKin(const std_msgs::Bool&)	1
 ../Core/Inc/ros/node_handle.h:50:7:constexpr ros::NodeHandleBase_::NodeHandleBase_()	1
 ../Core/Inc/ros/node_handle.h:106:7:constexpr ros::NodeHandle_<STM32Hardware>::NodeHandle_()	1
-../Core/Src/rosHandler.cpp:56:6:void HAL_UART_TxCpltCallback(UART_HandleTypeDef*)	1
-../Core/Src/rosHandler.cpp:60:6:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	1
-../Core/Src/rosHandler.cpp:67:6:void setup()	1
-../Core/Src/rosHandler.cpp:78:6:void loop()	1
-../Core/Src/rosHandler.cpp:85:6:void errorArrPublish()	1
-../Core/Src/rosHandler.cpp:90:6:void imuPublish()	1
+../Core/Src/rosHandler.cpp:64:6:void HAL_UART_TxCpltCallback(UART_HandleTypeDef*)	1
+../Core/Src/rosHandler.cpp:68:6:void HAL_UART_RxCpltCallback(UART_HandleTypeDef*)	1
+../Core/Src/rosHandler.cpp:76:6:void setup()	1
+../Core/Src/rosHandler.cpp:88:6:void loop()	1
+../Core/Src/rosHandler.cpp:96:6:void errorArrPublish()	1
+../Core/Src/rosHandler.cpp:101:6:void imuPublish(bno055_vector_t*, bno055_vector_t*, bno055_vector_t*)	1
+../Core/Src/rosHandler.cpp:120:6:void odomPublish()	1
 ../Core/Inc/ros/msg.h:188:15:static void ros::Msg::varToArr(A, V) [with A = unsigned char*; V = long unsigned int]	2
 ../Core/Inc/ros/msg.h:196:15:static void ros::Msg::arrToVar(V&, A) [with V = long unsigned int; A = unsigned char*]	2
 ../Core/Inc/ros/subscriber.h:44:7:ros::Subscriber_::Subscriber_()	1
@@ -94,7 +95,7 @@
 ../Core/Inc/ros/node_handle.h:384:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::setNow(const ros::Time&) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
 ../Core/Inc/ros/node_handle.h:538:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::logerror(const char*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
 ../Core/Inc/ros/node_handle.h:517:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::log(char, const char*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
-../Core/Src/rosHandler.cpp:94:1:void __static_initialization_and_destruction_0(int, int)	3
+../Core/Src/rosHandler.cpp:134:1:void __static_initialization_and_destruction_0(int, int)	3
 ../Core/Inc/ros/subscriber.h:114:16:void ros::Subscriber<MsgT, void>::callback(unsigned char*) [with MsgT = std_msgs::Bool]	1
 ../Core/Inc/ros/subscriber.h:128:15:int ros::Subscriber<MsgT, void>::getEndpointType() [with MsgT = std_msgs::Bool]	1
 ../Core/Inc/ros/subscriber.h:120:24:const char* ros::Subscriber<MsgT, void>::getMsgType() [with MsgT = std_msgs::Bool]	1
@@ -104,4 +105,4 @@
 ../Core/Inc/ros/subscriber.h:120:24:const char* ros::Subscriber<MsgT, void>::getMsgType() [with MsgT = geometry_msgs::Vector3]	1
 ../Core/Inc/ros/subscriber.h:124:24:const char* ros::Subscriber<MsgT, void>::getMsgMD5() [with MsgT = geometry_msgs::Vector3]	1
 ../Core/Inc/ros/node_handle.h:345:16:bool ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::connected() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
-../Core/Src/rosHandler.cpp:94:1:cpp)	1
+../Core/Src/rosHandler.cpp:134:1:cpp)	1

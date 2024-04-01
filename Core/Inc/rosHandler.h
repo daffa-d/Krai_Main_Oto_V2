@@ -11,6 +11,7 @@
 #include "main.h"
 #include "stm32f4xx_hal.h"
 #include "kin.h"
+#include "bno055.h"
 
 extern float xtarget;
 extern float ytarget;
@@ -19,6 +20,7 @@ extern float errorPub;
 extern float InvTarget[3];
 extern float msg_imu[10];
 extern bool stateInv;
+extern int16_t rawYaw;
 
 #ifdef __cplusplus
 
@@ -27,6 +29,7 @@ extern "C"{
 
 void setup();
 void loop();
+void imuPublish(bno055_vector_t*, bno055_vector_t*, bno055_vector_t*);
 
 #ifdef __cplusplus
 }
