@@ -88,8 +88,8 @@ all: main-build
 main-build: Krai_Main_Oto_V2.elf secondary-outputs
 
 # Tool invocations
-Krai_Main_Oto_V2.elf Krai_Main_Oto_V2.map: $(OBJS) $(USER_OBJS) C:\Users\daffa\STM32CubeIDE\workspace_1.14.1\Krai_Main_Oto_V2\STM32F429ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "Krai_Main_Oto_V2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\daffa\STM32CubeIDE\workspace_1.14.1\Krai_Main_Oto_V2\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Krai_Main_Oto_V2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Krai_Main_Oto_V2.elf Krai_Main_Oto_V2.map: $(OBJS) $(USER_OBJS) D:\KRI\KRAI24\Krai_Main_Oto_V2\STM32F429ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "Krai_Main_Oto_V2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\KRI\KRAI24\Krai_Main_Oto_V2\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Krai_Main_Oto_V2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

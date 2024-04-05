@@ -22,8 +22,8 @@ extern "C" {
 #define lambdaInv_Y 1000
 #define lambdaInv_TH 500
 
-#define lambdaX 900
-#define lambdaY 900
+#define lambdaX 1200
+#define lambdaY 1200
 #define lambdaTH 60
 
 #define d2r(x) x*(M_PI/180) // degree to radians
@@ -38,8 +38,8 @@ extern "C" {
 #define scale2 0.00000157 //0.00000157
 #define scale3 1
 
-#define Max_Cutoff_Mtr 600
-#define Min_Cutoff_Mtr -600
+#define Max_Cutoff_Mtr 800
+#define Min_Cutoff_Mtr -800
 
 #define Max_Cutoff_Mtr_Inv 400
 #define Min_Cutoff_Mtr_Inv -400

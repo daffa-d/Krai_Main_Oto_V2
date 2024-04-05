@@ -59,7 +59,7 @@ MotorKin InverseKin(vector3Kin *calOut){
 			.w1=0, .w2=0, .w3=0, .w4=0
 	};
 
-	errorPub = error_arrived = sqrt(pow(calOut->x, 2) + pow(calOut->y, 2) + pow(calOut->th, 2));
+	errorPub = error_arrived = sqrt(pow(abs(calOut->x), 2) + pow(abs(calOut->y), 2) + pow(abs(d2r(calOut->th)), 2));
 
 	if(error_arrived < 0.2)
 	{

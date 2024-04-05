@@ -76,8 +76,6 @@
 ../Core/Src/rosHandler.cpp:76:6:void setup()	1
 ../Core/Src/rosHandler.cpp:88:6:void loop()	1
 ../Core/Src/rosHandler.cpp:96:6:void errorArrPublish()	1
-../Core/Src/rosHandler.cpp:101:6:void imuPublish(bno055_vector_t*, bno055_vector_t*, bno055_vector_t*)	1
-../Core/Src/rosHandler.cpp:120:6:void odomPublish()	1
 ../Core/Inc/ros/msg.h:188:15:static void ros::Msg::varToArr(A, V) [with A = unsigned char*; V = long unsigned int]	2
 ../Core/Inc/ros/msg.h:196:15:static void ros::Msg::arrToVar(V&, A) [with V = long unsigned int; A = unsigned char*]	2
 ../Core/Inc/ros/subscriber.h:44:7:ros::Subscriber_::Subscriber_()	1
@@ -95,7 +93,7 @@
 ../Core/Inc/ros/node_handle.h:384:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::setNow(const ros::Time&) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
 ../Core/Inc/ros/node_handle.h:538:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::logerror(const char*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
 ../Core/Inc/ros/node_handle.h:517:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::log(char, const char*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
-../Core/Src/rosHandler.cpp:134:1:void __static_initialization_and_destruction_0(int, int)	3
+../Core/Src/rosHandler.cpp:99:1:void __static_initialization_and_destruction_0(int, int)	3
 ../Core/Inc/ros/subscriber.h:114:16:void ros::Subscriber<MsgT, void>::callback(unsigned char*) [with MsgT = std_msgs::Bool]	1
 ../Core/Inc/ros/subscriber.h:128:15:int ros::Subscriber<MsgT, void>::getEndpointType() [with MsgT = std_msgs::Bool]	1
 ../Core/Inc/ros/subscriber.h:120:24:const char* ros::Subscriber<MsgT, void>::getMsgType() [with MsgT = std_msgs::Bool]	1
@@ -105,4 +103,4 @@
 ../Core/Inc/ros/subscriber.h:120:24:const char* ros::Subscriber<MsgT, void>::getMsgType() [with MsgT = geometry_msgs::Vector3]	1
 ../Core/Inc/ros/subscriber.h:124:24:const char* ros::Subscriber<MsgT, void>::getMsgMD5() [with MsgT = geometry_msgs::Vector3]	1
 ../Core/Inc/ros/node_handle.h:345:16:bool ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::connected() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	1
-../Core/Src/rosHandler.cpp:134:1:cpp)	1
+../Core/Src/rosHandler.cpp:99:1:cpp)	1

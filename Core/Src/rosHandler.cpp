@@ -58,8 +58,8 @@ ros::Subscriber<geometry_msgs::Vector3> kinematic("robot/target_kinematic", &kin
 ros::Subscriber<geometry_msgs::Vector3> invKinematic("robot/inv_target_kinematic", &invkinCallback);
 ros::Subscriber<std_msgs::Bool> stateInv_Sub("robot/stateInv", &stateInverseKin);
 ros::Publisher errorArr("robot/Error_Aksen", &error_arr_msg);
-ros::Publisher imu_pub("robot/imu", &imuData);
-ros::Publisher odom_pub("robot/odom", &odomData);
+//ros::Publisher imu_pub("robot/imu", &imuData);
+//ros::Publisher odom_pub("robot/odom", &odomData);
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 	nh.getHardware()->flush();
@@ -76,8 +76,8 @@ void odomPublish();
 void setup(void) {
 	nh.initNode();
 	nh.advertise(errorArr); // error arrived
-	nh.advertise(imu_pub);
-	nh.advertise(odom_pub);
+//	nh.advertise(imu_pub);
+//	nh.advertise(odom_pub);
 	nh.subscribe(invKinematic); // inverse kinematic
 	nh.subscribe(kinematic); // forward kinematic
 	nh.subscribe(stateInv_Sub); // diaktifkan apabila menggunakan inverse kinematic
@@ -88,7 +88,7 @@ void setup(void) {
 void loop(){
 	errorArrPublish();
 //	imuPublish();
-	odomPublish();
+//	odomPublish();
 	nh.spinOnce();
 	HAL_Delay(10);
 }
@@ -97,7 +97,7 @@ void errorArrPublish(){
 	error_arr_msg.data = errorPub;
 	errorArr.publish(&error_arr_msg);
 }
-
+/*
 void imuPublish(bno055_vector_t* quat, bno055_vector_t* line, bno055_vector_t* gyro){
 	msg_imu[0] = quat->w;
 	msg_imu[1] = quat->x;
@@ -132,3 +132,4 @@ void odomPublish(){
 	odomData.data_length = 7;
 	odom_pub.publish(&odomData);
 }
+*/
