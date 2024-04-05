@@ -31,23 +31,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .comment      00000043  00000000  00000000  00030228  2**0
                   CONTENTS, READONLY
- 14 .debug_info   000297bf  00000000  00000000  0003026b  2**0
+ 14 .debug_info   0002980a  00000000  00000000  0003026b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_abbrev 00004eff  00000000  00000000  00059a2a  2**0
+ 15 .debug_abbrev 00004eff  00000000  00000000  00059a75  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_aranges 00001e08  00000000  00000000  0005e930  2**3
+ 16 .debug_aranges 00001e10  00000000  00000000  0005e978  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_rnglists 0000177a  00000000  00000000  00060738  2**0
+ 17 .debug_rnglists 00001781  00000000  00000000  00060788  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_macro  0000a840  00000000  00000000  00061eb2  2**0
+ 18 .debug_macro  0000a840  00000000  00000000  00061f09  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   00023513  00000000  00000000  0006c6f2  2**0
+ 19 .debug_line   000236af  00000000  00000000  0006c749  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    000f2ecf  00000000  00000000  0008fc05  2**0
+ 20 .debug_str    000f2edb  00000000  00000000  0008fdf8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  000097a0  00000000  00000000  00182ad4  2**2
+ 21 .debug_frame  000097d4  00000000  00000000  00182cd4  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 0000006c  00000000  00000000  0018c274  2**0
+ 22 .debug_line_str 0000006c  00000000  00000000  0018c4a8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2830,6 +2830,9 @@ MotorKin InverseKin(vector3Kin *calOut){
  8001d64:	20000b18 	.word	0x20000b18
 
 08001d68 <kinMotor_V3>:
+	if(mtrKin->w4 > Max_Cutoff_Mtr) mtrKin->w4 = Max_Cutoff_Mtr;
+	else if(mtrKin->w4 < Min_Cutoff_Mtr) mtrKin->w4 = Min_Cutoff_Mtr;
+}
 
 void kinMotor_V3(MotorKin *mtrKin, float Ex, float Ey, float Eth)
 {
