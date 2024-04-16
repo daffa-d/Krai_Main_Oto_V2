@@ -16,6 +16,7 @@ float outDot[3];
 float Aksen[3];
 float prevAksen[3];
 float velo[3];
+unsigned long nowTime;
 unsigned long prevTime;
 double last_outDot[3];
 float error_arrived; // Variable only kin.cpp
@@ -32,21 +33,14 @@ vector3Kin ForwardKin(float xStar, float yStar, float thStar){
 				cos(d2r(yawVal)) * (sin(d2r(ENC_1)) * rpmExt[0] + sin(d2r(ENC_2)) * rpmExt[1] + sin(d2r(ENC_3)) * rpmExt[2]); // Y
 	outDot[2] = lengthAlpha * rpmExt[0] + lengthAlpha * rpmExt[1] + lengthAlpha * rpmExt[2]; // TH
 
-	if(HAL_GetTick() - prevTime >= 100){
+	nowTime = HAL_GetTick();
+	if(nowTime - prevTime >= 100){
 		Aksen[0] = Aksen[0] + outDot[0] * 100 * scale1; // X
 		Aksen[1] = Aksen[1] + outDot[1] * 100 * scale2; // Y
 	//	Aksen[2] = (Aksen[2] + outDot[2] * 100) * scale3; // theta
 		Aksen[2] = yawVal; // theta diambil dari heading imu
 
-		velo[0] = Aksen[0] - prevAksen[0];
-		velo[1] = Aksen[1] - prevAksen[1];
-		velo[2] = Aksen[2] - prevAksen[2];
-
-		prevAksen[0] = Aksen[0];
-		prevAksen[1] = Aksen[1];
-		prevAksen[2] = Aksen[2];
-
-		prevTime = HAL_GetTick();
+		prevTime = nowTime;
 	}
 
 	calOut.x = xStar - Aksen[0];
@@ -60,7 +54,7 @@ MotorKin InverseKin(vector3Kin *calOut){
 			.w1=0, .w2=0, .w3=0, .w4=0
 	};
 
-	errorPub = error_arrived = sqrt(pow(calOut->x, 2) + pow(calOut->y, 2) + pow(calOut->th, 2));
+	errorPub = error_arrived = sqrt(pow(abs(calOut->x), 2) + pow(abs(calOut->y), 2) + pow(abs(d2r(calOut->th)), 2));
 
 	if(error_arrived < 0.2)
 	{
@@ -70,7 +64,7 @@ MotorKin InverseKin(vector3Kin *calOut){
 	}
 	else
 	{
-		kinMotor_V3(&mtr, calOut->x, calOut->y, calOut->th);
+		kinMotor_V4(&mtr, calOut->x, calOut->y, calOut->th);
 	}
 
 	return mtr;
@@ -91,8 +85,27 @@ void kinMotor_V4(MotorKin *mtrKin, float Ex, float Ey, float Eth)
 			     (lambdaY * sin(d2r(45)) * (-sin(d2r(yawVal)) * Ex + cos(d2r(yawVal)) * Ey)) +
 			     (lambdaTH * alphaLengthMotor * Eth);
 
-	int arr[4] = {mtrKin->w1, mtrKin->w2, mtrKin->w3, mtrKin->w4};
-	int maxValue = *std::max_element(arr, arr + 4);
+	if(mtrKin->w1 > 0) mtrKin->w1 = map(mtrKin->w1, 0, 1000, Min_Cutoff_Mtr2, Max_Cutoff_Mtr2);
+	else if(mtrKin->w1 < 0) mtrKin->w1 = map(mtrKin->w1, 0, -1000, -Min_Cutoff_Mtr2, -Max_Cutoff_Mtr2);
+	if(mtrKin->w2 > 0) mtrKin->w2 = map(mtrKin->w2, 0, 1000, Min_Cutoff_Mtr2, Max_Cutoff_Mtr2);
+	else if(mtrKin->w2 < 0) mtrKin->w2 = map(mtrKin->w2, 0, -1000, -Min_Cutoff_Mtr2, -Max_Cutoff_Mtr2);
+	if(mtrKin->w3 > 0) mtrKin->w3 = map(mtrKin->w3, 0, 1000, Min_Cutoff_Mtr2, Max_Cutoff_Mtr2);
+	else if(mtrKin->w3 < 0) mtrKin->w3 = map(mtrKin->w3, 0, -1000, -Min_Cutoff_Mtr2, -Max_Cutoff_Mtr2);
+	if(mtrKin->w4 > 0) mtrKin->w4 = map(mtrKin->w4, 0, 1000, Min_Cutoff_Mtr2, Max_Cutoff_Mtr2);
+	else if(mtrKin->w4 < 0) mtrKin->w4 = map(mtrKin->w4, 0, -1000, -Min_Cutoff_Mtr2, -Max_Cutoff_Mtr2);
+
+	if(mtrKin->w1 > Max_Cutoff_Mtr) mtrKin->w1 = Max_Cutoff_Mtr;
+	else if(mtrKin->w1 < Min_Cutoff_Mtr) mtrKin->w1 = Min_Cutoff_Mtr;
+
+	if(mtrKin->w2 > Max_Cutoff_Mtr) mtrKin->w2 = Max_Cutoff_Mtr;
+	else if(mtrKin->w2 < Min_Cutoff_Mtr) mtrKin->w2 = Min_Cutoff_Mtr;
+
+	if(mtrKin->w3 > Max_Cutoff_Mtr) mtrKin->w3 = Max_Cutoff_Mtr;
+	else if(mtrKin->w3 < Min_Cutoff_Mtr) mtrKin->w3 = Min_Cutoff_Mtr;
+
+	if(mtrKin->w4 > Max_Cutoff_Mtr) mtrKin->w4 = Max_Cutoff_Mtr;
+	else if(mtrKin->w4 < Min_Cutoff_Mtr) mtrKin->w4 = Min_Cutoff_Mtr;
+
 }
 
 void kinMotor_V3(MotorKin *mtrKin, float Ex, float Ey, float Eth)
@@ -176,6 +189,10 @@ void kinMotor(MotorKin *mtrKin, float x, float y, float th) {
 
 	if(mtrKin->w4 > Max_Cutoff_Mtr_Inv) mtrKin->w4 = Max_Cutoff_Mtr_Inv;
 	else if(mtrKin->w4 < Min_Cutoff_Mtr_Inv) mtrKin->w4 = Min_Cutoff_Mtr_Inv;
+}
+
+long map(long x, long in_min, long in_max, long out_min, long out_max) {
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 //int* calculateFKin(int xStar, int yStar, int thStar) {

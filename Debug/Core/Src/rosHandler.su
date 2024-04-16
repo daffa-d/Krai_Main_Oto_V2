@@ -46,21 +46,6 @@
 ../Core/Inc/std_msgs/Float32.h:39:17:virtual int std_msgs::Float32::deserialize(unsigned char*)	24	static
 ../Core/Inc/std_msgs/Float32.h:56:26:virtual const char* std_msgs::Float32::getType()	16	static
 ../Core/Inc/std_msgs/Float32.h:57:26:virtual const char* std_msgs::Float32::getMD5()	16	static
-../Core/Inc/std_msgs/MultiArrayDimension.h:22:5:std_msgs::MultiArrayDimension::MultiArrayDimension()	16	static
-../Core/Inc/std_msgs/MultiArrayDimension.h:29:17:virtual int std_msgs::MultiArrayDimension::serialize(unsigned char*) const	24	static
-../Core/Inc/std_msgs/MultiArrayDimension.h:50:17:virtual int std_msgs::MultiArrayDimension::deserialize(unsigned char*)	32	static
-../Core/Inc/std_msgs/MultiArrayDimension.h:75:26:virtual const char* std_msgs::MultiArrayDimension::getType()	16	static
-../Core/Inc/std_msgs/MultiArrayDimension.h:76:26:virtual const char* std_msgs::MultiArrayDimension::getMD5()	16	static
-../Core/Inc/std_msgs/MultiArrayLayout.h:23:5:std_msgs::MultiArrayLayout::MultiArrayLayout()	16	static
-../Core/Inc/std_msgs/MultiArrayLayout.h:29:17:virtual int std_msgs::MultiArrayLayout::serialize(unsigned char*) const	24	static
-../Core/Inc/std_msgs/MultiArrayLayout.h:48:17:virtual int std_msgs::MultiArrayLayout::deserialize(unsigned char*)	32	static
-../Core/Inc/std_msgs/MultiArrayLayout.h:71:26:virtual const char* std_msgs::MultiArrayLayout::getType()	16	static
-../Core/Inc/std_msgs/MultiArrayLayout.h:72:26:virtual const char* std_msgs::MultiArrayLayout::getMD5()	16	static
-../Core/Inc/std_msgs/Float32MultiArray.h:23:5:std_msgs::Float32MultiArray::Float32MultiArray()	16	static
-../Core/Inc/std_msgs/Float32MultiArray.h:29:17:virtual int std_msgs::Float32MultiArray::serialize(unsigned char*) const	32	static
-../Core/Inc/std_msgs/Float32MultiArray.h:53:17:virtual int std_msgs::Float32MultiArray::deserialize(unsigned char*)	32	static
-../Core/Inc/std_msgs/Float32MultiArray.h:82:26:virtual const char* std_msgs::Float32MultiArray::getType()	16	static
-../Core/Inc/std_msgs/Float32MultiArray.h:83:26:virtual const char* std_msgs::Float32MultiArray::getMD5()	16	static
 ../Core/Inc/std_msgs/Bool.h:18:5:std_msgs::Bool::Bool()	16	static
 ../Core/Inc/std_msgs/Bool.h:23:17:virtual int std_msgs::Bool::serialize(unsigned char*) const	24	static
 ../Core/Inc/std_msgs/Bool.h:36:17:virtual int std_msgs::Bool::deserialize(unsigned char*)	24	static
@@ -76,8 +61,6 @@
 ../Core/Src/rosHandler.cpp:76:6:void setup()	8	static
 ../Core/Src/rosHandler.cpp:88:6:void loop()	8	static
 ../Core/Src/rosHandler.cpp:96:6:void errorArrPublish()	8	static
-../Core/Src/rosHandler.cpp:101:6:void imuPublish(bno055_vector_t*, bno055_vector_t*, bno055_vector_t*)	24	static
-../Core/Src/rosHandler.cpp:120:6:void odomPublish()	8	static
 ../Core/Inc/ros/msg.h:188:15:static void ros::Msg::varToArr(A, V) [with A = unsigned char*; V = long unsigned int]	24	static
 ../Core/Inc/ros/msg.h:196:15:static void ros::Msg::arrToVar(V&, A) [with V = long unsigned int; A = unsigned char*]	24	static
 ../Core/Inc/ros/subscriber.h:44:7:ros::Subscriber_::Subscriber_()	16	static
@@ -95,7 +78,7 @@
 ../Core/Inc/ros/node_handle.h:384:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::setNow(const ros::Time&) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	24	static
 ../Core/Inc/ros/node_handle.h:538:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::logerror(const char*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	16	static
 ../Core/Inc/ros/node_handle.h:517:8:void ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::log(char, const char*) [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	40	static
-../Core/Src/rosHandler.cpp:134:1:void __static_initialization_and_destruction_0(int, int)	16	static
+../Core/Src/rosHandler.cpp:99:1:void __static_initialization_and_destruction_0(int, int)	16	static
 ../Core/Inc/ros/subscriber.h:114:16:void ros::Subscriber<MsgT, void>::callback(unsigned char*) [with MsgT = std_msgs::Bool]	16	static
 ../Core/Inc/ros/subscriber.h:128:15:int ros::Subscriber<MsgT, void>::getEndpointType() [with MsgT = std_msgs::Bool]	16	static
 ../Core/Inc/ros/subscriber.h:120:24:const char* ros::Subscriber<MsgT, void>::getMsgType() [with MsgT = std_msgs::Bool]	16	static
@@ -105,4 +88,4 @@
 ../Core/Inc/ros/subscriber.h:120:24:const char* ros::Subscriber<MsgT, void>::getMsgType() [with MsgT = geometry_msgs::Vector3]	16	static
 ../Core/Inc/ros/subscriber.h:124:24:const char* ros::Subscriber<MsgT, void>::getMsgMD5() [with MsgT = geometry_msgs::Vector3]	16	static
 ../Core/Inc/ros/node_handle.h:345:16:bool ros::NodeHandle_<Hardware, MAX_SUBSCRIBERS, MAX_PUBLISHERS, INPUT_SIZE, OUTPUT_SIZE>::connected() [with Hardware = STM32Hardware; int MAX_SUBSCRIBERS = 25; int MAX_PUBLISHERS = 25; int INPUT_SIZE = 4096; int OUTPUT_SIZE = 4096]	16	static
-../Core/Src/rosHandler.cpp:134:1:cpp)	8	static
+../Core/Src/rosHandler.cpp:99:1:cpp)	8	static

@@ -24,7 +24,7 @@ extern "C" {
 
 #define lambdaX 900
 #define lambdaY 900
-#define lambdaTH 60
+#define lambdaTH 50
 
 #define d2r(x) x*(M_PI/180) // degree to radians
 #define lengthAlpha 0.18 // Panjang Encoder
@@ -40,6 +40,9 @@ extern "C" {
 
 #define Max_Cutoff_Mtr 600
 #define Min_Cutoff_Mtr -600
+
+#define Max_Cutoff_Mtr2 600
+#define Min_Cutoff_Mtr2 170
 
 #define Max_Cutoff_Mtr_Inv 400
 #define Min_Cutoff_Mtr_Inv -400
@@ -89,6 +92,7 @@ void kinMotor_V4(MotorKin *, float Ex, float Ey, float Eth); // prototype
 void kinMotor_V3(MotorKin*, float Ex, float Ey, float Eth); // aku pake yg ini
 void kinMotor_V2(MotorKin*, float Ex, float Ey, float Eth);
 void kinMotor(MotorKin *, float x, float y, float th); // yg ini untuk kamera
+long map(long x, long in_min, long in_max, long out_min, long out_max);
 
 #ifdef __cplusplus
 }
