@@ -7,6 +7,7 @@
 
 #include <kin.h>
 #include <rosHandler.h>
+#include <algorithm>
 
 int16_t yawVal;
 int16_t rpmExt[3];
@@ -73,6 +74,25 @@ MotorKin InverseKin(vector3Kin *calOut){
 	}
 
 	return mtr;
+}
+
+void kinMotor_V4(MotorKin *mtrKin, float Ex, float Ey, float Eth)
+{
+	mtrKin->w1 = (lambdaX * cos(d2r(135)) * (cos(d2r(yawVal)) * Ex + sin(d2r(yawVal)) * Ey)) +
+				 (lambdaY * sin(d2r(135)) * (-sin(d2r(yawVal)) * Ex + cos(d2r(yawVal)) * Ey)) +
+				 (lambdaTH * alphaLengthMotor * Eth);
+	mtrKin->w2 = (lambdaX * cos(d2r(-135)) * (cos(d2r(yawVal)) * Ex + sin(d2r(yawVal)) * Ey)) +
+				 (lambdaY * sin(d2r(-135)) * (-sin(d2r(yawVal)) * Ex + cos(d2r(yawVal)) * Ey)) +
+				 (lambdaTH * alphaLengthMotor * Eth);
+	mtrKin->w3 = (lambdaX * cos(d2r(-45)) * (cos(d2r(yawVal)) * Ex + sin(d2r(yawVal)) * Ey)) +
+			     (lambdaY * sin(d2r(-45)) * (-sin(d2r(yawVal)) * Ex + cos(d2r(yawVal)) * Ey)) +
+				 (lambdaTH * alphaLengthMotor * Eth);
+	mtrKin->w4 = (lambdaX * cos(d2r(45)) * (cos(d2r(yawVal)) * Ex + sin(d2r(yawVal)) * Ey)) +
+			     (lambdaY * sin(d2r(45)) * (-sin(d2r(yawVal)) * Ex + cos(d2r(yawVal)) * Ey)) +
+			     (lambdaTH * alphaLengthMotor * Eth);
+
+	int arr[4] = {mtrKin->w1, mtrKin->w2, mtrKin->w3, mtrKin->w4};
+	int maxValue = *std::max_element(arr, arr + 4);
 }
 
 void kinMotor_V3(MotorKin *mtrKin, float Ex, float Ey, float Eth)

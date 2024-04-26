@@ -85,6 +85,7 @@ typedef struct {
 
 vector3Kin ForwardKin(float xStar, float yStar, float thStar);
 MotorKin InverseKin(vector3Kin*);
+void kinMotor_V4(MotorKin *, float Ex, float Ey, float Eth); // prototype
 void kinMotor_V3(MotorKin*, float Ex, float Ey, float Eth); // aku pake yg ini
 void kinMotor_V2(MotorKin*, float Ex, float Ey, float Eth);
 void kinMotor(MotorKin *, float x, float y, float th); // yg ini untuk kamera
