@@ -51,8 +51,8 @@ geometry_msgs::Quaternion sensMsg;
 
 std_msgs::Bool stateInv_msg;
 std_msgs::Float32 error_arr_msg;
-std_msgs::Float32MultiArray imuData;
-std_msgs::Float32MultiArray odomData;
+//std_msgs::Float32MultiArray imuData;
+//std_msgs::Float32MultiArray odomData;
 
 ros::Subscriber<geometry_msgs::Vector3> kinematic("robot/target_kinematic", &kinCallback);
 ros::Subscriber<geometry_msgs::Vector3> invKinematic("robot/inv_target_kinematic", &invkinCallback);
@@ -97,7 +97,13 @@ void errorArrPublish(){
 	error_arr_msg.data = errorPub;
 	errorArr.publish(&error_arr_msg);
 }
+<<<<<<< HEAD
 /*
+=======
+
+/*
+
+>>>>>>> 7733a00285ce3db51579a09d1f07c991addf137e
 void imuPublish(bno055_vector_t* quat, bno055_vector_t* line, bno055_vector_t* gyro){
 	msg_imu[0] = quat->w;
 	msg_imu[1] = quat->x;
@@ -132,4 +138,8 @@ void odomPublish(){
 	odomData.data_length = 7;
 	odom_pub.publish(&odomData);
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7733a00285ce3db51579a09d1f07c991addf137e
 */

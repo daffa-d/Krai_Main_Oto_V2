@@ -63,6 +63,7 @@ UART_HandleTypeDef huart3;
 DMA_HandleTypeDef hdma_usart3_rx;
 DMA_HandleTypeDef hdma_usart3_tx;
 
+<<<<<<< HEAD
 /* Definitions for myTask01 */
 osThreadId_t myTask01Handle;
 const osThreadAttr_t myTask01_attributes = {
@@ -75,6 +76,30 @@ osThreadId_t myTask02Handle;
 const osThreadAttr_t myTask02_attributes = {
   .name = "myTask02",
   .stack_size = 1024 * 4,
+=======
+/* Definitions for KinematicTask */
+osThreadId_t KinematicTaskHandle;
+uint32_t myTask01Buffer[ 4096 ];
+osStaticThreadDef_t myTask01ControlBlock;
+const osThreadAttr_t KinematicTask_attributes = {
+  .name = "KinematicTask",
+  .cb_mem = &myTask01ControlBlock,
+  .cb_size = sizeof(myTask01ControlBlock),
+  .stack_mem = &myTask01Buffer[0],
+  .stack_size = sizeof(myTask01Buffer),
+  .priority = (osPriority_t) osPriorityRealtime,
+};
+/* Definitions for RosTask */
+osThreadId_t RosTaskHandle;
+uint32_t RosTaskBuffer[ 1024 ];
+osStaticThreadDef_t RosTaskControlBlock;
+const osThreadAttr_t RosTask_attributes = {
+  .name = "RosTask",
+  .cb_mem = &RosTaskControlBlock,
+  .cb_size = sizeof(RosTaskControlBlock),
+  .stack_mem = &RosTaskBuffer[0],
+  .stack_size = sizeof(RosTaskBuffer),
+>>>>>>> 7733a00285ce3db51579a09d1f07c991addf137e
   .priority = (osPriority_t) osPriorityHigh2,
 };
 /* Definitions for ImuTask */
@@ -84,6 +109,7 @@ const osThreadAttr_t ImuTask_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityHigh2,
 };
+<<<<<<< HEAD
 /* Definitions for myTask04 */
 osThreadId_t myTask04Handle;
 uint32_t myTask04Buffer[ 256 ];
@@ -95,6 +121,19 @@ const osThreadAttr_t myTask04_attributes = {
   .stack_mem = &myTask04Buffer[0],
   .stack_size = sizeof(myTask04Buffer),
   .priority = (osPriority_t) osPriorityNormal,
+=======
+/* Definitions for GUI_LCD_Task */
+osThreadId_t GUI_LCD_TaskHandle;
+const osThreadAttr_t GUI_LCD_Task_attributes = {
+  .name = "GUI_LCD_Task",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityRealtime1,
+};
+/* Definitions for myTimer01 */
+osTimerId_t myTimer01Handle;
+const osTimerAttr_t myTimer01_attributes = {
+  .name = "myTimer01"
+>>>>>>> 7733a00285ce3db51579a09d1f07c991addf137e
 };
 /* USER CODE BEGIN PV */
 extern int16_t rawYaw; // data mentah heading
@@ -104,19 +143,17 @@ int16_t valueENC_EXT[3];
 vector3Kin vect3_Kin;
 MotorKin MotorOut;
 bno055_vector_t vector;
-bno055_vector_t gyro;
-bno055_vector_t line;
-bno055_vector_t quat;
+int count;
 
 // Diakses Diluar Main.c
 extern int16_t yawVal; // hasil kalkukasi heading
 extern int16_t rpmExt[3];
+extern float Aksen[3];
 extern float xtarget;
 extern float ytarget;
 extern float thtarget;
 extern float InvTarget[3];
 extern bool stateInv;
-extern float msg_imu[10];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -129,10 +166,11 @@ static void MX_TIM1_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM13_Init(void);
 static void MX_I2C2_Init(void);
-void StartDefaultTask(void *argument);
+void DefaultTask(void *argument);
 void commTask(void *argument);
 void ImuTask_Function(void *argument);
 void GUI_Task(void *argument);
+void Callback01(void *argument);
 
 /* USER CODE BEGIN PFP */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
@@ -196,6 +234,13 @@ int main(void)
 	/* add semaphores, ... */
   /* USER CODE END RTOS_SEMAPHORES */
 
+<<<<<<< HEAD
+=======
+  /* Create the timer(s) */
+  /* creation of myTimer01 */
+  myTimer01Handle = osTimerNew(Callback01, osTimerPeriodic, NULL, &myTimer01_attributes);
+
+>>>>>>> 7733a00285ce3db51579a09d1f07c991addf137e
   /* USER CODE BEGIN RTOS_TIMERS */
 	/* start timers, add new ones, ... */
   /* USER CODE END RTOS_TIMERS */
@@ -205,17 +250,30 @@ int main(void)
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
+<<<<<<< HEAD
   /* creation of myTask01 */
   myTask01Handle = osThreadNew(StartDefaultTask, NULL, &myTask01_attributes);
 
   /* creation of myTask02 */
   myTask02Handle = osThreadNew(commTask, NULL, &myTask02_attributes);
+=======
+  /* creation of KinematicTask */
+  KinematicTaskHandle = osThreadNew(DefaultTask, NULL, &KinematicTask_attributes);
+
+  /* creation of RosTask */
+  RosTaskHandle = osThreadNew(commTask, NULL, &RosTask_attributes);
+>>>>>>> 7733a00285ce3db51579a09d1f07c991addf137e
 
   /* creation of ImuTask */
   ImuTaskHandle = osThreadNew(ImuTask_Function, NULL, &ImuTask_attributes);
 
+<<<<<<< HEAD
   /* creation of myTask04 */
   myTask04Handle = osThreadNew(GUI_Task, NULL, &myTask04_attributes);
+=======
+  /* creation of GUI_LCD_Task */
+  GUI_LCD_TaskHandle = osThreadNew(GUI_Task, NULL, &GUI_LCD_Task_attributes);
+>>>>>>> 7733a00285ce3db51579a09d1f07c991addf137e
 
   /* USER CODE BEGIN RTOS_THREADS */
 	/* add threads, ... */
@@ -555,9 +613,15 @@ static void MX_TIM13_Init(void)
 
   /* USER CODE END TIM13_Init 1 */
   htim13.Instance = TIM13;
+<<<<<<< HEAD
   htim13.Init.Prescaler = 13;
   htim13.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim13.Init.Period = 59999;
+=======
+  htim13.Init.Prescaler = 167;
+  htim13.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim13.Init.Period = 49999;
+>>>>>>> 7733a00285ce3db51579a09d1f07c991addf137e
   htim13.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim13.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
   if (HAL_TIM_Base_Init(&htim13) != HAL_OK)
@@ -856,17 +920,27 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 /* USER CODE END 4 */
 
-/* USER CODE BEGIN Header_StartDefaultTask */
+/* USER CODE BEGIN Header_DefaultTask */
 /**
+<<<<<<< HEAD
  * @brief  Function implementing the myTask01 thread.
  * @param  argument: Not used
  * @retval None
  */
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void *argument)
+=======
+  * @brief  Function implementing the KinematicTask thread.
+  * @param  argument: Not used
+  * @retval None
+  */
+/* USER CODE END Header_DefaultTask */
+void DefaultTask(void *argument)
+>>>>>>> 7733a00285ce3db51579a09d1f07c991addf137e
 {
   /* USER CODE BEGIN 5 */
 	initializeMotor();
+	osTimerStart(myTimer01Handle, 100);
 	vTaskDelay(10);
 	stateInv = false;
 	/* Infinite loop */
@@ -920,10 +994,13 @@ void ImuTask_Function(void *argument)
 	/* Infinite loop */
 	for (;;) {
 		vector = bno055_getVectorEuler();
+<<<<<<< HEAD
 //		gyro = bno055_getVectorGyroscope();
 //		line = bno055_getVectorLinearAccel();
 //		quat = bno055_getVectorQuaternion();
 //		imuPublish(&quat, &line, &gyro);
+=======
+>>>>>>> 7733a00285ce3db51579a09d1f07c991addf137e
 		vTaskDelay(1);
 		rawYaw = vector.x;
 		yawVal = imuCallback(rawYaw);
@@ -946,6 +1023,7 @@ void GUI_Task(void *argument)
 	char buff[50];
 	/* Infinite loop */
 	for (;;) {
+		lcd_clear();
 		lcd_send_cmd(0x80 | 0x04);
 		lcd_send_string("ABUROBONEMA");
 
@@ -957,13 +1035,23 @@ void GUI_Task(void *argument)
 		sprintf(buff, "X:%.2f  Y:%.2f", Aksen[0], Aksen[1]);
 		lcd_send_string(buff);
 		lcd_send_cmd(0x80 | 0x54);
-		sprintf(buff, "err:%.3f", sqrt(pow(vect3_Kin.x, 2) + pow(vect3_Kin.y, 2) + pow(vect3_Kin.th, 2)));
+		sprintf(buff, "err:%.3f", sqrt(pow(abs(vect3_Kin.x), 2)) + pow(abs(vect3_Kin.y), 2) + pow(abs(d2r(vect3_Kin.th)), 2));
 		lcd_send_string(buff);
-		lcd_clear();
-		vTaskDelay(10);
+		vTaskDelay(50);
 		osDelay(1);
 	}
   /* USER CODE END GUI_Task */
+<<<<<<< HEAD
+=======
+}
+
+/* Callback01 function */
+void Callback01(void *argument)
+{
+  /* USER CODE BEGIN Callback01 */
+
+  /* USER CODE END Callback01 */
+>>>>>>> 7733a00285ce3db51579a09d1f07c991addf137e
 }
 
 /**
@@ -985,7 +1073,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 1 */
 	if (htim->Instance == TIM13) {
 		for (uint8_t i = 0; i < 3; i++) {
-			rpmExt[i] = valueENC_EXT[i] * 6000 / 715;
+			rpmExt[i] = valueENC_EXT[i] * 600 / 715;
+//			rpmExt[i] = rpmExt[i] * (0.029 * 2 * 3.14);
 			valueENC_EXT[i] = 0;
 		}
 	}

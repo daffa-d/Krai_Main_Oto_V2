@@ -46,21 +46,6 @@
 ../Core/Inc/std_msgs/Float32.h:39:17:virtual int std_msgs::Float32::deserialize(unsigned char*)	1
 ../Core/Inc/std_msgs/Float32.h:56:26:virtual const char* std_msgs::Float32::getType()	1
 ../Core/Inc/std_msgs/Float32.h:57:26:virtual const char* std_msgs::Float32::getMD5()	1
-../Core/Inc/std_msgs/MultiArrayDimension.h:22:5:std_msgs::MultiArrayDimension::MultiArrayDimension()	1
-../Core/Inc/std_msgs/MultiArrayDimension.h:29:17:virtual int std_msgs::MultiArrayDimension::serialize(unsigned char*) const	1
-../Core/Inc/std_msgs/MultiArrayDimension.h:50:17:virtual int std_msgs::MultiArrayDimension::deserialize(unsigned char*)	2
-../Core/Inc/std_msgs/MultiArrayDimension.h:75:26:virtual const char* std_msgs::MultiArrayDimension::getType()	1
-../Core/Inc/std_msgs/MultiArrayDimension.h:76:26:virtual const char* std_msgs::MultiArrayDimension::getMD5()	1
-../Core/Inc/std_msgs/MultiArrayLayout.h:23:5:std_msgs::MultiArrayLayout::MultiArrayLayout()	1
-../Core/Inc/std_msgs/MultiArrayLayout.h:29:17:virtual int std_msgs::MultiArrayLayout::serialize(unsigned char*) const	2
-../Core/Inc/std_msgs/MultiArrayLayout.h:48:17:virtual int std_msgs::MultiArrayLayout::deserialize(unsigned char*)	3
-../Core/Inc/std_msgs/MultiArrayLayout.h:71:26:virtual const char* std_msgs::MultiArrayLayout::getType()	1
-../Core/Inc/std_msgs/MultiArrayLayout.h:72:26:virtual const char* std_msgs::MultiArrayLayout::getMD5()	1
-../Core/Inc/std_msgs/Float32MultiArray.h:23:5:std_msgs::Float32MultiArray::Float32MultiArray()	1
-../Core/Inc/std_msgs/Float32MultiArray.h:29:17:virtual int std_msgs::Float32MultiArray::serialize(unsigned char*) const	2
-../Core/Inc/std_msgs/Float32MultiArray.h:53:17:virtual int std_msgs::Float32MultiArray::deserialize(unsigned char*)	3
-../Core/Inc/std_msgs/Float32MultiArray.h:82:26:virtual const char* std_msgs::Float32MultiArray::getType()	1
-../Core/Inc/std_msgs/Float32MultiArray.h:83:26:virtual const char* std_msgs::Float32MultiArray::getMD5()	1
 ../Core/Inc/std_msgs/Bool.h:18:5:std_msgs::Bool::Bool()	1
 ../Core/Inc/std_msgs/Bool.h:23:17:virtual int std_msgs::Bool::serialize(unsigned char*) const	1
 ../Core/Inc/std_msgs/Bool.h:36:17:virtual int std_msgs::Bool::deserialize(unsigned char*)	1
